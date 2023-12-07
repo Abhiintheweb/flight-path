@@ -9,27 +9,36 @@ class TestFlightPlath(unittest.TestCase):
         self.priceMatrix = [[0, 15, 80, 90], [0, 0, 40, 50], [0, 0, 0, 70], [0, 0, 0, 0]]
         self.fp = FlightPlath(self.priceMatrix, self.indeces)
 
-    def test_findPathAndPrice(self):
+    def test_flight_path(self):
         source = 'Castle Black'
         destination = 'Kings Landing'
         sourceIndex, destinationIndex = self.indeces.index(source), self.indeces.index(destination)
 
-        paths = self.fp.findPathAndPrice(sourceIndex, destinationIndex)
-        expected_paths = [[(0, 0), (1, 15), (2, 40), (3, 70)], 
-         [(0, 0), (1, 15), (3, 50)], 
-         [(0, 0), (2, 80), (3, 70)], 
-         [(0, 0), (3, 90)]] 
+        paths = self.fp.flightPath(sourceIndex, destinationIndex)
+        expected_paths =  [([0, 3], 90), ([0, 2, 3], 150), ([0, 1, 3], 65), ([0, 1, 2, 3], 125)]
         self.assertEqual(paths, expected_paths)
-
-    def test_findPrice(self):
+    def test_flightPath_with_same_source_destination(self):
         source = 'Castle Black'
         destination = 'Kings Landing'
         sourceIndex, destinationIndex = self.indeces.index(source), self.indeces.index(destination)
+        try:
+            paths = self.fp.flightPath(sourceIndex, sourceIndex)
+        except Exception:
+            self.assertRaises(Exception)
+    
+    def test_flightPath_with_out_of_boundery_source_destination(self):
+        source = 'Castle Black'
+        destination = 'Kings Landing'
+        # sourceIndex, destinationIndex = self.indeces.index(source), self.indeces.index(destination)
+        try:
+            paths = self.fp.flightPath(99, -11)
+        except Exception:
+            self.assertRaises(Exception)
+        
+        
 
-        total_prices = self.fp.findPrice(sourceIndex, destinationIndex)
-        expected_prices = [110, 65, 150, 90]
 
-        self.assertEqual(total_prices, expected_prices)
+    
     
 if __name__ == '__main__':
     unittest.main()
