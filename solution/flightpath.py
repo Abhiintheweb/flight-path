@@ -37,21 +37,13 @@ class FlightPlath(object):
         self.printPath(finalPath)
         return finalPath
 
-
-
-
-
-
-    
-
-
 if __name__ == '__main__':
     
     arguments = sys.argv[1:]
     print('arguments=>', arguments)
     source = arguments[0] if arguments[0] else 'Castle Black'
     destination =  arguments[1] if arguments[1] else 'Riverrun'
-    
+
     indeces = ['Castle Black', 'Winterfell', 'Riverrun', 'Kings Landing']
     priceMatrix = [[0,15,80,90],[0,0,40,50],[0,0,0,70],[0,0,0,0]]
 
