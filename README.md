@@ -42,3 +42,6 @@ It will display the path and price on the screen.
 ```bash
 python flightpath.test.py
 ```
+
+# Try diffrent testcases
+In flightpath.py change indeces and flightMatrix on line number 47 and 48
